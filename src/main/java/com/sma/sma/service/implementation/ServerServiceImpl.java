@@ -7,11 +7,14 @@ import com.sma.sma.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.Servlet;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+import java.util.Random;
 
 import static java.lang.Boolean.TRUE;
 import static org.springframework.data.domain.PageRequest.of;
@@ -67,6 +70,7 @@ public class ServerServiceImpl implements ServerService {
     }
 
     private String setServerImageUrl() {
-        return null;
+        String[] imageNames = {"server1.png", "server2.png", "server3.png", "server4.png"};
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/server/image/" + imageNames[new Random().nextInt(4)]).toUriString();
     }
 }
